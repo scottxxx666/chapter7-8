@@ -110,6 +110,53 @@
 							// do something
 						}
 					</code></pre>
+					
+					
+					###避免 do/while 迴圈
+					<pre><code>
+						// 從 node 開始搜尋，尋找指定的 name
+						// 不考慮大於 max_length 之後的節點
+						public boolean ListHasNode(Node node, String name, int max_length) {
+							do {
+								if (node.name().equals(name))
+									return true;
+								node = node.next();
+							} while (node != null && --max_length > 0);
+							
+							return false;
+						}
+					</code></pre>
+					
+					
+					###為了避免 do/while 
+					<pre><code>
+						body
+						
+						while (condition) {
+							body again
+						}
+					</code></pre>
+					蠢
+					
+					###多數 do/while 可以改成 while
+					<pre><code>
+						public boolean ListHasNode(Node node, String name, int max_length) {
+							while (node != null && max_length-- > 0) {
+								if (node.name().equals(name))	return true;
+								node = node.next();
+							}
+							return false;
+						}
+					</code></pre>
+					
+					###避免在 do/while 裡面用 continue
+					<pre><code>
+						do {
+							continue;
+						} while (false);
+					</code></pre>
+					
+					
 				</section>
 
 
