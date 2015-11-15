@@ -49,7 +49,6 @@
 					
 					
 					
-					##條件式中的順序條件
 					<pre>
 						<code>
 							if (length >= 10)
@@ -61,6 +60,31 @@
 							if (10 <= length)
 						</code>
 					</pre>
+					
+					<pre>
+						<code>
+							while (byte_received < byte_expected)
+						</code>
+					</pre>
+					或
+					<pre>
+						<code>
+							while (byte_expected > byte_received)
+						</code>
+					</pre>
+					
+					<table>
+						<tr>
+							<td>左側</td>
+							<td>右側</td>
+						</tr>
+						<tr>
+							<td>代表比較對象
+							，數值較有變化</td>
+							<td>代表比較基準
+							，數值大多是固定常數</td>
+						</tr>
+					</table>
 				</section>
 
 
