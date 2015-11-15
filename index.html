@@ -91,6 +91,25 @@
 					* 先處理肯定條件
 					* 先處理簡單的情況
 					* 先處理比較有趣或明顯的情況
+					
+					<pre><code>
+						if (!Request::has("id")) {
+							// do something
+						}
+						else {
+							// do something else
+						}
+					</code></pre>
+					有事嗎?
+					
+					<pre><code>
+						if (!Session::has("open_id")) {
+							// not login!!!
+						}
+						else {
+							// do something
+						}
+					</code></pre>
 				</section>
 
 
