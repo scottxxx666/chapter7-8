@@ -93,9 +93,9 @@
 					* 先處理比較有趣或明顯的情況
 					
 					<pre><code>
-					if (!uri.HasQueryParameter("expand_all"))
+					if (uri.HasQueryParameter("expand_all") != true) {
 						response.Render(items);
-					else {
+					} else {
 						for (int i = 0; i < item.size() ; i++) {
 							item[i].Expand();
 						}
