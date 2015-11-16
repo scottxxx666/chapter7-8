@@ -93,22 +93,22 @@
 					* 先處理比較有趣或明顯的情況
 					
 					<pre><code>
-						if (!Request::has("id")) {
-							// do something
+						if (!Request::has("expand_all")) {
+							// do something<br>
 						}
 						else {
-							// do something else
+							// do something else<br>
 						}
 					</code></pre>
-					有事嗎?
+					要你不要想"粉紅色大象"!
 					
 					<pre><code>
 						if (!Session::has("open_id")) {
-							// not login!!!
+							// not login!!!<br>
 							
 						}
 						else {
-							//do something
+							//do something<br>
 						}
 					</code></pre>
 					
@@ -169,6 +169,66 @@
 					</code></pre>
 					
 					
+					###減少巢狀結構
+					<pre><code>
+						if (user_result == SUCCESS) {
+							if (permission_result != SUCCESS) {
+								reply.WriteErrors("error reading permissions");
+								reply.Done();
+								return;
+							}
+							reply.WriteErrors("");
+						} else {
+							reply.WriteErrors(user_result);
+						}
+						reply.Done();
+					</code></pre>
+					
+					
+					###用儘早返回函數消除巢狀結構
+					<pre><code>
+						if (user_result != SUCCESS) {
+							reply.WriteErrors(user_result);
+							reply.Done();
+							return;
+						}
+						
+						if (permission_result != SUCCESS) {
+							reply.WriteErrors(permission_result);
+							reply.Done();
+							return;
+						}
+						
+						reply.WriteErrors("");
+						reply.Done();
+					</code></pre>
+					
+					###消除迴圈中的巢狀結構
+					<pre><code>
+						for (int i=0; i < result.size();i++) {
+							if(result[i] != NULL) {
+								non_null_count++;
+								if (result[i]->name != "") {
+									cout << "Considering candidate.."<<endl;
+									
+									...
+								}
+							}
+						}
+					</code></pre>
+					
+					###用continue去解
+					<pre><code>
+						for (int i=0; i < result.size();i++) {
+							if(result[i] == NULL) continue;
+							non_null_count++;
+							
+							if (result[i]->name == "") continue;
+							cout << "Considering candidate.."<<endl;
+							
+							...
+						}
+					</code></pre>
 					
 				</section>
 
