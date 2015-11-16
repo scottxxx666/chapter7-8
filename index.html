@@ -93,24 +93,24 @@
 					* 先處理比較有趣或明顯的情況
 					
 					<pre><code>
-						if (!uri.HasQueryParameter("expand_all")) {
-							response.Render(items);
+					if(!uri.HasQueryParameter("expand_all")) {
+						response.Render(items);
+					}
+					else {
+						for (int i = 0; i < item.size() ; i++) {
+							item[i].Expand();
 						}
-						else {
-							for (int i = 0; i < item.size() ; i++) {
-								item[i].Expand();
-							}
-						}
+					}
 					</code></pre>
 					要你不要想"粉紅色大象"!
 					
 					<pre><code>
-						if (!is_login) {
-							// not login!!!
-						}
-						else {
-							//do something
-						}
+					if (!is_login){
+						// not login!!!
+					}
+					else {
+						//do something
+					}
 					</code></pre>
 					
 					
@@ -128,7 +128,6 @@
 							return false;
 						}
 					</code></pre>
-					
 					
 					###為了避免 do/while 
 					<pre><code>
@@ -168,7 +167,6 @@
 							if (substr.equals("")) return true;
 						}
 					</code></pre>
-					
 					
 					###減少巢狀結構
 					<pre><code>
@@ -285,11 +283,11 @@
 					1. not (a or b or c) <=> (not a) and (not b) and (not c)
 					2. not (a and b and c) <=> (not a) or (not b) or (not c)
 					<pre><code>
-						if (!(file_exists && !is_protected)) {
+						if(!(file_exists && !is_protected)) {
 							Error("Sorry, could not read file");
 						}
 						
-						if (!file_exists || is_protected) {
+						if(!file_exists || is_protected) {
 							Error("Sorry, could not read file");
 						}
 					</code></pre>
@@ -349,7 +347,6 @@
 							}
 						}
 					</code></pre>
-					
 					
 					###分解巨大的敘述(1/2)
 					<pre><code>
