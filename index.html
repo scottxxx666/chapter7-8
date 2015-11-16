@@ -303,6 +303,82 @@
 						bucket = Findbucket(key);
 						if (bucket != NULL) assert(!bucket->IsOccupied());
 					</code></pre>
+					
+					
+					###與複雜邏輯搏鬥
+					<pre><code>
+						struct Range{
+							int begin;
+							int end;
+							bool OverlapsWith(Range other);
+						};
+					</code></pre>
+					
+					###實作OverlapsWith--檢查兩個段點是否位於other的範圍中
+					<pre><code>
+						bool Range::OverlapsWith(Range other) {
+							return (begin >= other.begin && begin < other.begin) ||
+							       (end < other.begin && end <= other.end) ||
+							       (begin <= other.begin && end >= other.end);
+						}
+					</code></pre>
+					
+					###從"相反方向解決問題"
+					<pre><code>
+						bool Range::OverlapsWith(Range other) {
+							if (other.end <= begin) return false; // 他們在我們開始之前就結束
+							if (other.begin >= end) return false; // 他們在我們結束之後才開始
+							
+							return true;
+						}
+					</code></pre>
+					
+					
+					###分解巨大的敘述(1/2)
+					<pre><code>
+						void update_highlight = function (message_num) {
+							if ($("#vote_value" + message_num).html() === "Up") {
+								$("#thumbs_up" + message_num).addClass("highlighted");
+								$("#thumbs_down" + message_num).removeClass("highlighted");
+							} else if ($("#vote_value" + message_num).html() === "Down") {
+								$("#thumbs_up" + message_num).removeClass("highlighted");
+								$("#thumbs_down" + message_num).addClass("highlighted");
+							} else {
+								$("#thumbs_up" + message_num).removeClass("highlighted");
+								$("#thumbs_down" + message_num).removeClass("highlighted");	
+							}
+						}
+					</code></pre>
+					
+					
+					###分解巨大的敘述(1/2)
+					<pre><code>
+						void update_highlight = function (message_num) {
+							var thumbs_up = $("#thumbs_up" + message_num);
+							var thumbs_down = $("#thumbs_down" + message_num);
+							var vote_value = $("#vote_value" + message_num).html();
+							var hi = "highlighted";
+							
+							if (vote_value === "Up") {
+								thumbs_up.addClass(hi);
+								thumbs_down.removeClass(hi);
+							} else if (vote_value === "Down") {
+								thumbs_up.removeClass(hi);
+								thumbs_down.addClass(hi);
+							} else {
+								thumbs_up.removeClass(hi);
+								thumbs_down.removeClass(hi);	
+							}
+						}
+					</code></pre>
+					
+					
+					###Chapter 8 結語
+					* 解釋性變數好處
+						* 分解巨大的表示式
+						* 以有意義的名稱作為程式碼的說明
+					* 笛摩根定律
+					* 反轉問題或是考慮相反的目標
 				</section>
 
 
