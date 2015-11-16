@@ -93,22 +93,23 @@
 					* 先處理比較有趣或明顯的情況
 					
 					<pre><code>
-						if (!Request::has("expand_all")) {
-							// do something<br>
+						if (!uri.HasQueryParameter("expand_all")) {
+							response.Render(items);
 						}
 						else {
-							// do something else<br>
+							for (int i = 0; i < item.size() ; i++) {
+								item[i].Expand();
+							}
 						}
 					</code></pre>
 					要你不要想"粉紅色大象"!
 					
 					<pre><code>
-						if (!Session::has("open_id")) {
-							// not login!!!<br>
-							
+						if (!is_login) {
+							// not login!!!
 						}
 						else {
-							//do something<br>
+							//do something
 						}
 					</code></pre>
 					
@@ -236,6 +237,72 @@
 					* if/else順序: 先處理肯定/容易/有趣
 					* 盡可能減少巢狀結構
 					
+					
+					
+					##Chapter 8
+					##分解巨大表示式
+					
+					
+					###解釋性變數 (explaining variable)
+					<pre><code>
+						if (line.split(':')[0].strip() == "root")
+						
+						user_name = line.split(':')[0].strip();
+						if (user_name == "root")
+					</code></pre>
+					
+					
+					###摘要變數 (summary variable) (1/2)
+					<pre><code>
+						if (request.user.id == document.owned_id) {
+							// 使用者可以編輯
+						}
+						
+						...
+						if (request.user.id != document.owned_id) {
+							// 文件狀態是唯讀
+						}
+					</code></pre>
+					
+					
+					###摘要變數 (summary variable) (2/2)
+					<pre><code>
+						final boolean user_owns_document = (request.user.id == document.owned_id);
+						
+						if (user_owns_document) {
+							// 使用者可以編輯
+						}
+						
+						...
+						if (user_owns_document) {
+							// 文件狀態是唯讀
+						}
+					</code></pre>
+					
+					
+					
+					###利用笛摩根定律 (De Morgan's law)
+					1. not (a or b or c) <=> (not a) and (not b) and (not c)
+					2. not (a and b and c) <=> (not a) or (not b) or (not c)
+					<pre><code>
+						if (!(file_exists && !is_protected)) {
+							Error("Sorry, could not read file");
+						}
+						
+						if (!file_exists || is_protected) {
+							Error("Sorry, could not read file");
+						}
+					</code></pre>
+					
+					
+					
+					###誤用捷徑邏輯
+					<pre><code>
+						assert((!(bucket = Findbucket(key))) || !bucket->IsOccupied)
+						
+						bucket = Findbucket(key);
+						if (bucket != NULL) assert(!bucket->IsOccupied());
+					</code></pre>
 				</section>
 
 
