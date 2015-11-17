@@ -318,8 +318,6 @@
 							bool OverlapsWith(Range other);
 						};
 					</code></pre>
-					
-					###實作OverlapsWith--檢查兩個段點是否位於other的範圍中
 					![Image of Overlaps](http://www.codeproject.com/KB/cs/DateRangeOverlapTesting/range_problem.jpg)
 					
 					###實作OverlapsWith--檢查兩個段點是否位於other的範圍中
@@ -412,7 +410,13 @@
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{
+						src: 'plugin/markdown/markdown.js',
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						callback: function() {
+						    Array.prototype.forEach.call(document.querySelectorAll('section > p'), function(ele){ ele.className = 'fragment'; });
+						}
+					 }
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
