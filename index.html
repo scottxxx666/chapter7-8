@@ -412,11 +412,11 @@
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{
 						src: 'plugin/markdown/markdown.js',
-						condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						condition: function() { return !!document.querySelector( '[data-markdown]' ); } ,
 						callback: function() {
 						    Array.prototype.forEach.call(document.querySelectorAll('section > p'), function(ele){ ele.className = 'fragment'; });
 						}
-					 }
+					 },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
