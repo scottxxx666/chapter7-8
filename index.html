@@ -95,18 +95,23 @@
 					
 					###要你不要想"粉紅色大象"!
 					<pre><code>
-					if (uri.HasQueryParameter("expand_all") != true) {
-						response.Render(items);
-					} else {
-						for (int i = 0; i < item.size() ; i++) {
-							item[i].Expand();
+						if (uri.HasQueryParameter("expand_all") != true) {
+							response.Render(items);
+						} else {
+							for (int i = 0; i < item.size() ; i++) {
+								item[i].Expand();
+							}
 						}
-					}
 					</code></pre>
 					
 					### 先處理簡單的情況
 					<pre><code>
-					if ($is_login != true)
+						if (!is_login) {
+							not_login
+						}
+						else {
+							do_something
+						}
 					</code></pre>
 					
 					
