@@ -83,7 +83,7 @@
 					<pre><code>
 						if (null == $obj)
 					</code></pre>
-					_現代編譯器都會產生警告?_
+					<span class="fragment fade-in">_現代編譯器都會產生警告?_</span>
 					
 					
 					
@@ -107,10 +107,10 @@
 					### 先處理簡單的情況
 					<pre><code>
 						if (!is_login) {
-							not_login
+							// not login
 						}
 						else {
-							do_something
+							// do  something
 						}
 					</code></pre>
 					
@@ -139,7 +139,7 @@
 							body again
 						}
 					</code></pre>
-					蠢
+					<span class="fragment fade-in">蠢</span>
 					
 					
 					###多數 do/while 可以改成 while
@@ -286,14 +286,12 @@
 					1. not (a or b or c) <=> (not a) and (not b) and (not c)
 					2. not (a and b and c) <=> (not a) or (not b) or (not c)
 					<pre><code>
-						if(file_exists == true) {
-							Error("Sorry, could not read file");
-						}
-						
 						if(!(file_exists && !is_protected)) {
 							Error("Sorry, could not read file");
 						}
-						
+					</code></pre>
+					v.s.
+					<pre><code>
 						if(!file_exists || is_protected) {
 							Error("Sorry, could not read file");
 						}
@@ -304,7 +302,9 @@
 					###誤用捷徑邏輯
 					<pre><code>
 						assert((!(bucket = Findbucket(key))) || !bucket->IsOccupied)
-						
+					</code></pre>
+					v.s.
+					<pre><code>
 						bucket = Findbucket(key);
 						if (bucket != NULL) assert(!bucket->IsOccupied());
 					</code></pre>
