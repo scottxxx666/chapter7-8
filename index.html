@@ -265,7 +265,6 @@
 						}
 					</code></pre>
 					
-					
 					###摘要變數 (summary variable) (2/2)
 					<pre><code>
 						final boolean user_owns_document = (request.user.id == document.owned_id);
@@ -292,9 +291,9 @@
 					</code></pre>
 					v.s.
 					<pre><code>
-						if(!file_exists || is_protected) {
-							Error("Sorry, could not read file");
-						}
+							if(!file_exists || is_protected) {
+								Error("Sorry, could not read file");
+							}
 					</code></pre>
 					
 					
